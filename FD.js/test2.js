@@ -47,12 +47,11 @@ class  Course {
         this._type = value;
     }
 }
-
 const S = new FD.space();
 //const mathematiques = new Course(1,S.decl('TypeMathematiques',[[1,2]]),"Mathematiques",30);
 //const francais = new Course(2,S.decl('TypeFrancais',[[1,2]]),"Francais",30);
-S.decl('t', [[1, 2]]);
-S.decl('b', [[1, 2]]);
+S.decl('t',[[1,2]]);
+S.decl('b',[[1,2]]);
 S.neq('t','b');
 FD.distribute.naive(S, ['t','b']);
 console.log(S);
