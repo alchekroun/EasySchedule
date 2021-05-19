@@ -1,4 +1,3 @@
-
 try {
     FD.space;
 } catch (e) {
@@ -135,7 +134,7 @@ var tests= [
                 var S = test.script(new FD.space());
                 if (S) {
                     var start = Date.now();
-                    var state = {space: S}; // for-debugging: {space: S, verify: test.verify};
+                    var state = {space: S, verify: test.verify}; // for-debugging: {space: S, verify: test.verify};
                     var count = 0;
 
                     display.show('<p><b><a name="' + test.name + '">' + test.name + '</a>:</b> ' + test.description + '</p>' + (test.single_step ? ' (single stepping)' : ''));
