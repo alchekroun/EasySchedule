@@ -1,4 +1,4 @@
-export class Competence{
+class Competence{
     constructor(idCompetence,name) {
         this._idCompetence = idCompetence;
         this._name = name;

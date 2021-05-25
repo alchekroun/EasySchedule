@@ -1,4 +1,4 @@
-export class Timetable {
+class Timetable {
     constructor(idTimetable,name) {
         this._idTimetable = idTimetable;
         this._name=name;

@@ -1,4 +1,4 @@
-export class Lecture{
+class Lecture{
     constructor(idLecture,duration) {
         this._idLecture = idLecture;
         this._duration= duration;

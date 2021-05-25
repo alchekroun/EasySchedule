@@ -1,4 +1,4 @@
-export class Teacher{
+class Teacher{
     constructor(idTeacher,name) {
         this._idTeacher= idTeacher;
         this._name = name;

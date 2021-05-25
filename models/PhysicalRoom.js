@@ -1,4 +1,4 @@
-export class PhysicalRoom extends Room{
+class PhysicalRoom extends Room{
     constructor(idRoom,capacity,site,nbRoom) {
         super(idRoom);
         this._capacity=capacity;

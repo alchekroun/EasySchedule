@@ -1,4 +1,4 @@
-export class AmphiTeacher extends Teacher {
+class AmphiTeacher extends Teacher {
     constructor(idTeacher, name) {
         super(idTeacher, name);
         this._nbHoursToTeach=25;

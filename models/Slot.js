@@ -1,4 +1,4 @@
-export class Slot {
+class Slot {
     constructor(idSlot, hourStart, hourEnd, DayOfWeek) {
         this._idSlot = idSlot;
         this._hourStart = hourStart;

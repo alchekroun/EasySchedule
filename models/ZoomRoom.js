@@ -1,4 +1,4 @@
-export class ZoomRoom extends Room{
+class ZoomRoom extends Room{
     constructor(idRoom,url) {
         super(idRoom);
         this._url = url;

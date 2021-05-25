@@ -1,4 +1,4 @@
-export class Room {
+class Room {
     constructor(idRoom) {
         this._idRoom = idRoom;
     }
