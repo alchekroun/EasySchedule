@@ -5,20 +5,20 @@ export class Teacher{
     }
 
 
-    get idTeacher() {
+    getIdTeacher() {
         return this._idTeacher;
     }
 
-    set idTeacher(value) {
+    setIdTeacher(value) {
         this._idTeacher = value;
     }
 
 
-    get name() {
+    getName() {
         return this._name;
     }
 
-    set name(value) {
+    setName(value) {
         this._name = value;
     }
 }

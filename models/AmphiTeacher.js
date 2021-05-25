@@ -7,25 +7,25 @@ export class AmphiTeacher extends Teacher {
     }
 
 
-    get idTeacher() {
+    getIdTeacher() {
         return this._idTeacher;
     }
 
-    set idTeacher(value) {
+    setIdTeacher(value) {
         this._idTeacher = value;
     }
 
 
-    set nbHoursToTeach(value) {
+    setNbHoursToTeach(value) {
         this._nbHoursToTeach = value;
     }
 
 
-    get name() {
+    getName() {
         return this._name;
     }
 
-    set name(value) {
+    setName(value) {
         this._name = value;
     }
 }

@@ -5,20 +5,20 @@ export class Competence{
     }
 
 
-    get name() {
+    getName() {
         return this._name;
     }
 
-    set name(value) {
+    setName(value) {
         this._name = value;
     }
 
 
-    get idCompetence() {
+    getIdCompetence() {
         return this._idCompetence;
     }
 
-    set idCompetence(value) {
+    setIdCompetence(value) {
         this._idCompetence = value;
     }
 }

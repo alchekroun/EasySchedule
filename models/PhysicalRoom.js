@@ -8,38 +8,38 @@ export class PhysicalRoom extends Room{
     }
 
 
-    get idRoom() {
+    getIdRoom() {
         return this._idRoom;
     }
 
-    set idRoom(value) {
+    setIdRoom(value) {
         this._idRoom = value;
     }
 
 
-    get site() {
+    getSite() {
         return this._site;
     }
 
-    set site(value) {
+    setSite(value) {
         this._site = value;
     }
 
 
-    get nbRoom() {
+    getNbRoom() {
         return this._nbRoom;
     }
 
-    set nbRoom(value) {
+    setNbRoom(value) {
         this._nbRoom = value;
     }
 
 
-    get capacity() {
+    getCapacity() {
         return this._capacity;
     }
 
-    set capacity(value) {
+    setCapacity(value) {
         this._capacity = value;
     }
 }

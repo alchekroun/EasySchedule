@@ -7,38 +7,38 @@ export class Slot {
     }
 
 
-    get idSlot() {
+    getIdSlot() {
         return this._idSlot;
     }
 
-    set idSlot(value) {
+    setIdSlot(value) {
         this._idSlot = value;
     }
 
 
-    get hourStart() {
+    getHourStart() {
         return this._hourStart;
     }
 
-    set hourStart(value) {
+    setHourStart(value) {
         this._hourStart = value;
     }
 
 
-    get hourEnd() {
+    getHourEnd() {
         return this._hourEnd;
     }
 
-    set hourEnd(value) {
+    setHourEnd(value) {
         this._hourEnd = value;
     }
 
 
-    get DayOfWeek() {
+    getDayOfWeek() {
         return this._DayOfWeek;
     }
 
-    set DayOfWeek(value) {
+    setDayOfWeek(value) {
         this._DayOfWeek = value;
     }
 }

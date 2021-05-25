@@ -6,19 +6,19 @@ export class ZoomRoom extends Room{
     }
 
 
-    get idRoom() {
+    getIdRoom() {
         return this._idRoom;
     }
 
-    set idRoom(value) {
+    setIdRoom(value) {
         this._idRoom = value;
     }
 
-    get url() {
+    getUrl() {
         return this._url;
     }
 
-    set url(value) {
+    setUrl(value) {
         this._url = value;
     }
 }

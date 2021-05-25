@@ -1,4 +1,4 @@
-export class  Course {
+ class Course {
     constructor(idCourse,type,name,nbHoursToTeach) {
         this._idCourse = idCourse;
         this._nbHoursToTeach = nbHoursToTeach;
@@ -6,48 +6,43 @@ export class  Course {
         this._type = type;
     }
 
-
-    get idCourse() {
+    getIdCourse() {
         return this._idCourse;
     }
 
-    set idCourse(value) {
+    setIdCourse(value) {
         this._idCourse = value;
     }
 
-    get nbHoursToTeach() {
+    getNbHoursToTeach() {
         return this._nbHoursToTeach;
     }
 
-    set nbHoursToTeach(value) {
+    setNbHoursToTeach(value) {
         this._nbHoursToTeach = value;
     }
 
 
-    get name() {
+    getName() {
         return this._name;
     }
 
-    set name(value) {
+    setName(value) {
         this._name = value;
     }
 
 
-    get type() {
+    getType() {
         return this._type;
     }
 
-    set type(value) {
+    setType(value) {
         this._type = value;
     }
 }
 
-import {Course} from 'models/Course';
-try {
-    FD.space;
-} catch (e) {
-    alert("fd.js module needs to be loaded before fd-tests.js");
-}
 
-const mathematiques = new Course(1,1,"Mathematiques",30);
-console.log(mathematiques.type);
+
+
+
+

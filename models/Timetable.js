@@ -5,20 +5,20 @@ export class Timetable {
     }
 
 
-    get idTimetable() {
+    getIdTimetable() {
         return this._idTimetable;
     }
 
-    set idTimetable(value) {
+    setIdTimetable(value) {
         this._idTimetable = value;
     }
 
 
-    get name() {
+    getName() {
         return this._name;
     }
 
-    set name(value) {
+    setName(value) {
         this._name = value;
     }
 }

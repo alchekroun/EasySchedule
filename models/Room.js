@@ -3,11 +3,11 @@ export class Room {
         this._idRoom = idRoom;
     }
 
-    get idRoom() {
+    getIdRoom() {
         return this._idRoom;
     }
 
-    set idRoom(value) {
+    setIdRoom(value) {
         this._idRoom = value;
     }
 }

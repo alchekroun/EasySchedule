@@ -5,20 +5,20 @@ export class Lecture{
     }
 
 
-    get idLecture() {
+    getIdLecture() {
         return this._idLecture;
     }
 
-    set idLecture(value) {
+    setIdLecture(value) {
         this._idLecture = value;
     }
 
 
-    get duration() {
+    getDuration() {
         return this._duration;
     }
 
-    set duration(value) {
+    setDuration(value) {
         this._duration = value;
     }
 }
