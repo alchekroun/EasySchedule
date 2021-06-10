@@ -1,9 +1,11 @@
  class Course {
-    constructor(idCourse,type,name,nbHoursToTeach) {
+    constructor(idCourse,type,name,nbHoursToTeach,competence,teacher) {
         this._idCourse = idCourse;
         this._nbHoursToTeach = nbHoursToTeach;
         this._name = name;
         this._type = type;
+        this._n_competence = competence;
+        this._teacher = teacher;
     }
 
     getIdCourse() {
@@ -39,6 +41,23 @@
     setType(value) {
         this._type = value;
     }
+
+     getCompetence() {
+         return this._n_competence;
+     }
+
+     setCompetence(value) {
+         this._n_competence = value;
+     }
+
+     getTeacher() {
+         return this._teacher;
+     }
+
+     setTeacher(value) {
+         this._teacher = value;
+     }
+
 }
 
 

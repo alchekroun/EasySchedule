@@ -45,7 +45,7 @@ S.distinct(["S1","S2","S3","S4","S5","S6"]);
 S.product(["L1M","L2M","L3M","L4M","L5M","L6M"],"total");
 
 FD.distribute.naive(S, ["S1","S2","S3","S4","S5","S6","L1M","L2M","L3M","L4M","L5M","L6M"]); */
-
+/*
 let list_prof = {};
 
 
@@ -73,7 +73,7 @@ S.num("M2C",3);*/
 /*S.decl("M1Prof",[[1,2]]);
 S.decl("M2Prof",[[1,2]]);
 
-S.decl("PP",[[1,2]]);*/
+S.decl("PP",[[1,2]]);
 
 // Contraintes
 
@@ -86,7 +86,7 @@ for(let key in list_prof){
         S.eq(key, "c2");
     }
 }
-/*
+
 S.eq("P1C","M1C");
 S.eq("PP","M1Prof");
 S.eq("P1C","M2C");
@@ -94,18 +94,129 @@ S.eq("PP","M2Prof");
 
 S.eq("P2C","M1C");
 
-S.eq("P2C","M2C");*/
+S.eq("P2C","M2C");
 
-FD.distribute.naive(S, ["c1", "t1", "t2"]);
-
-
+FD.distribute.naive(S, ["c1", "t1", "t2"]); */
 
 
 
+let list_prof = {};
+let list_Course={};
+let list_prof_fd={};
+
+
+//PROFS
+let t1 = new Teacher(1, "alex", 1);
+list_prof["t1"] = t1;
+
+
+let t2 = new Teacher(2, "david", 2);
+list_prof["t2"] = t2;
+
+let t3 = new Teacher(3, "alexis",4);
+list_prof["t3"] = t3;
+
+
+let t4 = new Teacher(4, "davidon", 3);
+list_prof["t4"] = t4;
+
+
+// MATIERE
+let c1 = new Course(1, 1, "analyse", 1,2,"C1prof");
+let c2 = new Course(2, 2, "algèbre", 1,1,"C2prof");
+let c3 = new Course(3, 1, "info1", 1,3,"C3prof");
+let c4 = new Course(4, 2, "info2", 1,4,"C4prof");
+list_Course["c1"] = c1;
+list_Course["c2"] = c2;
+list_Course["c3"] = c3;
+list_Course["c4"] = c4;
+var a =[[1,1],[2,2],[3,3],[4,4]];
+S.decl("C1prof",a);
+S.decl("C2prof",[[1,4]]);
+S.decl("C3prof",[[1,4]]);
+S.decl("C4prof",[[1,4]]);
+list_prof_fd["c1"]="C1prof";
+list_prof_fd["c2"]="C2prof";
+list_prof_fd["c3"]="C3prof";
+list_prof_fd["c4"]="C4prof";
+
+
+for(let key in list_prof){
+    for(let key1 in list_Course){
+            if(list_prof[key].getCompetence() === list_Course[key1].getCompetence()){
+                S.eq(S.konst(list_prof[key].getIdTeacher()),list_prof_fd[key1]);
+            }
+        }
+}
+//S.distinct(list_prof_fd);
+FD.distribute.naive(S, ["C1prof","C2prof","C3prof","C4prof"]);
+
+/*
+
+
+
+let list_prof = {};
+let list_Course={};
+let list_prof_fd={};
+
+
+//PROFS
+let t1 = new Teacher(1, "alex", [1,3]);
+list_prof["t1"] = t1;
+
+
+let t2 = new Teacher(2, "david", [2]);
+list_prof["t2"] = t2;
+
+let t3 = new Teacher(3, "alexis",[4]);
+list_prof["t3"] = t3;
+
+
+let t4 = new Teacher(4, "davidon", [2,3]);
+list_prof["t4"] = t4;
+
+
+// MATIERE
+let c1 = new Course(1, 1, "analyse", 1,2,"C1prof");
+let c2 = new Course(2, 2, "algèbre", 1,1,"C2prof");
+let c3 = new Course(3, 1, "info1", 1,3,"C3prof");
+let c4 = new Course(4, 2, "info2", 1,4,"C4prof");
+list_Course["c1"] = c1;
+list_Course["c2"] = c2;
+list_Course["c3"] = c3;
+list_Course["c4"] = c4;
 
 
 
 
+/* for(let key in list_prof){
+    for(let key1 in list_Course){
+        if(list_prof[key].getCompetence() === list_Course[key1].getCompetence()){
+            S.eq(S.konst(list_prof[key].getIdTeacher()),list_prof_fd[key1]);
+        }
+    }
+}
+
+var tab=[];
+var a;
+
+for(let key1 in list_Course){
+    for (let key in list_prof){
+        for (let i in list_prof[key].getCompetence()){
+            a=[list_prof[key].getIdTeacher(),list_prof[key].getIdTeacher()];
+            if (list_prof[key].getCompetence()[i] === list_Course[key1].getCompetence()) {
+                tab.push(a);
+            }
+        }
+
+    }
+    S.decl(list_Course[key1].getTeacher(),tab);
+    tab.pop();
+}
+S.distinct();
+//S.distinct(list_prof_fd);
+FD.distribute.naive(S, ["C1prof","C2prof","C3prof","C4prof"]);
+ */
 
 
 
