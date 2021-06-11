@@ -96,7 +96,7 @@ S.eq("P2C","M1C");
 
 S.eq("P2C","M2C");
 
-FD.distribute.naive(S, ["c1", "t1", "t2"]); */
+FD.distribute.naive(S, ["c1", "t1", "t2"]);
 
 
 
@@ -151,13 +151,13 @@ for(let key in list_prof){
 //S.distinct(list_prof_fd);
 FD.distribute.naive(S, ["C1prof","C2prof","C3prof","C4prof"]);
 
-/*
+*/
 
 
 
 let list_prof = {};
 let list_Course={};
-let list_prof_fd={};
+let dom;
 
 
 //PROFS
@@ -186,37 +186,28 @@ list_Course["c2"] = c2;
 list_Course["c3"] = c3;
 list_Course["c4"] = c4;
 
+let CourseProf=[];
 
-
-
-/* for(let key in list_prof){
-    for(let key1 in list_Course){
-        if(list_prof[key].getCompetence() === list_Course[key1].getCompetence()){
-            S.eq(S.konst(list_prof[key].getIdTeacher()),list_prof_fd[key1]);
-        }
-    }
-}
-
-var tab=[];
-var a;
-
-for(let key1 in list_Course){
-    for (let key in list_prof){
-        for (let i in list_prof[key].getCompetence()){
-            a=[list_prof[key].getIdTeacher(),list_prof[key].getIdTeacher()];
+for (let key1 in list_Course) {
+    let tab=[];
+    for (let key in list_prof) {
+        for (let i in list_prof[key].getCompetence()) {
             if (list_prof[key].getCompetence()[i] === list_Course[key1].getCompetence()) {
-                tab.push(a);
+                dom = [list_prof[key].getIdTeacher(), list_prof[key].getIdTeacher()];
+                tab.unshift(dom);
             }
         }
 
     }
-    S.decl(list_Course[key1].getTeacher(),tab);
-    tab.pop();
+    S.decl(list_Course[key1].getTeacher(), tab.sort());
+    CourseProf.push(list_Course[key1].getTeacher());
 }
-S.distinct();
-//S.distinct(list_prof_fd);
-FD.distribute.naive(S, ["C1prof","C2prof","C3prof","C4prof"]);
- */
+
+console.log(S);
+S.distinct(CourseProf);
+FD.distribute.naive(S, CourseProf);
+
+
 
 
 
