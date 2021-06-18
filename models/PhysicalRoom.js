@@ -1,10 +1,11 @@
 class PhysicalRoom extends Room{
-    constructor(idRoom,capacity,site,nbRoom) {
+    constructor(idRoom,capacity,site,nbRoom,Disponibilite) {
         super(idRoom);
         this._capacity=capacity;
         this._site=site;
         this._nbRoom= nbRoom;
         this._idRoom = idRoom;
+        this._Disponibilite= Disponibilite;
     }
 
 
@@ -41,5 +42,13 @@ class PhysicalRoom extends Room{
 
     setCapacity(value) {
         this._capacity = value;
+    }
+
+    getDisponibilite() {
+        return this._Disponibilite;
+    }
+
+    setDisponibilite(value) {
+        this._Disponibilite = value;
     }
 }

@@ -1,9 +1,10 @@
 class Slot {
-    constructor(idSlot, hourStart, hourEnd, DayOfWeek) {
+    constructor(idSlot, hourStart, hourEnd, DayOfWeek,lecture) {
         this._idSlot = idSlot;
         this._hourStart = hourStart;
         this._hourEnd = hourEnd;
         this._DayOfWeek = DayOfWeek;
+        this._lecture= lecture;
     }
 
 
@@ -40,5 +41,13 @@ class Slot {
 
     setDayOfWeek(value) {
         this._DayOfWeek = value;
+    }
+
+    getLecture() {
+        return this._lecture;
+    }
+
+    setLecture(value) {
+        this._lecture = value;
     }
 }
