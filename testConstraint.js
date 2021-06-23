@@ -44,8 +44,7 @@ S.decl("S6",[[1,6]]);
 S.distinct(["S1","S2","S3","S4","S5","S6"]);
 S.product(["L1M","L2M","L3M","L4M","L5M","L6M"],"total");
 
-FD.distribute.naive(S, ["S1","S2","S3","S4","S5","S6","L1M","L2M","L3M","L4M","L5M","L6M"]); */
-/*
+FD.distribute.naive(S, ["S1","S2","S3","S4","S5","S6","L1M","L2M","L3M","L4M","L5M","L6M"]);
 let list_prof = {};
 
 
@@ -66,11 +65,11 @@ let c2 = new Course(2, 2, "algèbre", 1);
 S.decl("c2", [[1,2]])
 
 //COMPETENCE POUR ENSEIGNER LES MATIERES
-/*S.num("M1C",4);
-S.num("M2C",3);*/
+/!*S.num("M1C",4);
+S.num("M2C",3);
 
 //MATIERE ENSEIGNÉ PAR LE PROF
-/*S.decl("M1Prof",[[1,2]]);
+S.decl("M1Prof",[[1,2]]);
 S.decl("M2Prof",[[1,2]]);
 
 S.decl("PP",[[1,2]]);
@@ -151,7 +150,7 @@ for(let key in list_prof){
 //S.distinct(list_prof_fd);
 FD.distribute.naive(S, ["C1prof","C2prof","C3prof","C4prof"]);
 
-*/
+
 
 
 
@@ -255,7 +254,7 @@ for(let key in list_Lecture)
 }
 
 //L[]Room
-/*
+/!*
 for(let key in list_Lecture){
     let tab=[];
     for(let key1 in list_Room){
@@ -269,7 +268,7 @@ for(let key in list_Lecture){
     S.decl(list_Lecture[key].getRoom(), tab.sort());
     AllVar.push(list_Lecture[key].getRoom());
 }
-*/
+
 //C[]teacher
 
 for (let key1 in list_Course) {
@@ -316,4 +315,13 @@ FD.distribute.naive(S,AllVar);
 
 
 
+*/
 
+if (document.getElementById('tableauProf').value != "" || document.getElementById('tableauMatiere').value != ""){
+    var tableauProf = document.getElementById('tableauProf').value
+    var tableauMatiere = document.getElementById('tableauMatiere').value
+    objProf = JSON.parse(tableauProf)
+    objMatiere = JSON.parse(tableauMatiere)
+    alert(objProf)
+    alert(objMatiere)
+}

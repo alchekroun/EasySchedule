@@ -3,9 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+    ></script>
+
 </head>
 <body>
 
+<form id="form" method="post" action="index2.php">
+    <input name="tableauProf" id="tableauProf" value="" style="display:none;">
+    <input name="tableauMatiere" id="tableauMatiere" value="" style="display:none;">
+
+    <div class="table-responsive">
+        <p>Ajouts professeurs</p>
+        <TABLE class="table align-middle" id="dataTableProf" width="350px" border="1">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Competence</th>
+                <th scope="col">Suppression</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row" class="idProf"><input type="number" value="" id="idProf1" name="idProf1"></td>
+                <td class="nameProf"><input type="text" value="" id="nameProf1" name="nameProf1"></td>
+                <td class="competencesProf"><input type="text" value="" id="competencesProf1" name="competencesProf1"></td>
+            </tr>
+            </tbody>
+        </TABLE>
+        <INPUT type="button" value="Add Row" onclick="addRow('dataTableProf')" />
+    </div>
+
+    <div class="table-responsive">
+        <p>Ajouts matieres</p>
+        <table class="table align-middle" id="dataTableCourse" width="10%" border="1">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Nombre d'heure</th>
+                <th scope="col">Competence</th>
+                <th scope="col">Enseignant</th>
+                <th scope="col">Nombre d'etudiant</th>
+                <th scope="col">Salle de cours</th>
+                <th scope="col">Suppression</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td scope="row" class="idCourse"><input type="number" value="" id="idCourse1"name="idCourse1"></td>
+                <td class="nameProfCourse"><input type="text" value="" id="nameProfCourse1" name="nameProfCourse1"></td>
+                <td class="competencesProfMatiere"><input type="number" value="" id="competencesProfMatiere1" name="competencesProf1"></td>
+                <td class="competenceMatiere"><input type="number" value="" id="competenceMatiere1" name="competenceMatiere1"></td>
+                <td class="enseignant"><input type="text" value="" id="enseignant1" name="enseignant1"></td>
+                <td class="nbEtudiant"><input type="number" value="" id="nbEtudiant1" name="nbEtudiant1"></td>
+                <td class="salleCours"><input type="text" value="" id="salleCours1" name="salleCours1"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <input type="button" value="Add Row" onclick="addRow('dataTableCourse')" />
+    <button type="button" class="btn btn-primary btn-block" onclick="remplissageTableau('dataTableCourse','tableauMatiere');remplissageTableau('dataTableProf','tableauProf');submitForm()">Valider</button>
+
+
+    <br><br>
+
+</form>
+
+<script src="tableFunction.js"></script>
 <script src="FD.js/fd.js"></script>
 <script src="models/Course.js"></script>
 <script src="models/Slot.js"></script>
