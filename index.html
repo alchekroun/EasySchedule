@@ -27,7 +27,10 @@
 </head>
 <body>
 
-<form method="post" action="">
+<form id="form" method="post" action="">
+    <input name="tableauProf" id="tableauProf" value="" style="display:none;">
+    <input name="tableauMatiere" id="tableauMatiere" value="" style="display:none;">
+
     <div class="table-responsive">
         <p>Ajouts professeurs</p>
     <TABLE class="table align-middle" id="dataTableProf" width="350px" border="1">
@@ -41,18 +44,15 @@
         </thead>
         <tbody>
         <tr>
-            <td scope="row" class="idProf"><input type="number" value="" id="idProf" name="idProf"></td>
-            <td class="nameProf"><input type="text" value="" id="nameProf" name="nameProf"></td>
-            <td class="competencesProf"><input type="text" value="" id="competencesProf" name="competencesProf"></td>
-            <td><input type="button" name="button1" value="Delete" onclick="removeRow('button1', 'dataTableProf')"></td>
+            <td scope="row" class="idProf"><input type="number" value="" id="idProf1" name="idProf1"></td>
+            <td class="nameProf"><input type="text" value="" id="nameProf1" name="nameProf1"></td>
+            <td class="competencesProf"><input type="text" value="" id="competencesProf1" name="competencesProf1"></td>
         </tr>
         </tbody>
     </TABLE>
         <INPUT type="button" value="Add Row" onclick="addRow('dataTableProf')" />
     </div>
-</form>
 
-<form method="post" action="">
     <div class="table-responsive">
         <p>Ajouts matieres</p>
     <table class="table align-middle" id="dataTableCourse" width="10%" border="1">
@@ -70,19 +70,20 @@
         </thead>
         <tbody>
         <tr>
-            <td scope="row" class="idCourse"><input type="number" value="" id="idCourse"name="idCourse"></td>
-            <td class="nameProfCourse"><input type="text" value="" id="nameProfCourse" name="nameProfCourse"></td>
-            <td class="competencesProfMatiere"><input type="number" value="" id="competencesProfMatiere" name="competencesProf"></td>
-            <td class="competenceMatiere"><input type="number" value="" id="competenceMatiere" name="competenceMatiere"></td>
-            <td class="enseignant"><input type="text" value="" id="enseignant" name="enseignant"></td>
-            <td class="nbEtudiant"><input type="number" value="" id="nbEtudiant" name="nbEtudiant"></td>
-            <td class="salleCours"><input type="text" value="" id="salleCours" name="salleCours"></td>
-            <td><input type="button" id="button1" name="button1" value="Delete" onclick="removeRow('button1', 'dataTableCourse')"></td>
+            <td scope="row" class="idCourse"><input type="number" value="" id="idCourse1"name="idCourse1"></td>
+            <td class="nameProfCourse"><input type="text" value="" id="nameProfCourse1" name="nameProfCourse1"></td>
+            <td class="competencesProfMatiere"><input type="number" value="" id="competencesProfMatiere1" name="competencesProf1"></td>
+            <td class="competenceMatiere"><input type="number" value="" id="competenceMatiere1" name="competenceMatiere1"></td>
+            <td class="enseignant"><input type="text" value="" id="enseignant1" name="enseignant1"></td>
+            <td class="nbEtudiant"><input type="number" value="" id="nbEtudiant1" name="nbEtudiant1"></td>
+            <td class="salleCours"><input type="text" value="" id="salleCours1" name="salleCours1"></td>
         </tr>
         </tbody>
     </table>
     </div>
     <input type="button" value="Add Row" onclick="addRow('dataTableCourse')" />
+    <button type="button" class="btn btn-primary btn-block" onclick="remplissageTableau('dataTableCourse','tableauMatiere');remplissageTableau('dataTableProf','tableauProf');submitForm()">Valider</button>
+
 
     <br><br>
 
@@ -104,8 +105,8 @@
                 var idNameCell = document.getElementById(tableID).rows[1].cells[i].className
                 var cell = row.insertCell(i);
                 var element = document.createElement("input");
-                element.type = document.getElementById(idNameCell).type;
-                var btnName = idNameCell + (rowCount + 1);
+                element.type = document.getElementById(idNameCell + '1').type; //Nom de la cellule + 1 pour avoir la 1ere rows du tableau
+                var btnName = idNameCell + (rowCount);
                 element.id = btnName;
                 element.name = btnName;
                 cell.appendChild(element);
@@ -114,7 +115,7 @@
             var cell = row.insertCell(-1);
             var element = document.createElement("input");
             element.type = "button";
-            var btnName = "button" + (rowCount + 1);
+            var btnName = "button" + (rowCount);
             element.name = btnName;
             element.setAttribute('value', 'Delete'); // or element.value = "Delete";
             //element.onclick = function () { removeRow(btnName, tableID); }
@@ -125,14 +126,16 @@
             alert(e);
         }
     }
+
     function removeRow(btnName, tableID) {
         try {
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
-            var nbColonne = document.getElementById(tableID).rows[0].cells.length
-            for (var i = 0; i < rowCount; i++) {
+            var nbColonne = document.getElementById(tableID).rows[0].cells.length-1
+            //i=1 pour sauter la 1ere ligne correspondant au titre du tableau
+            for (var i = 2; i < rowCount; i++) {
                 var row = table.rows[i];
-                var rowObj = row.cells[nbColonne-1].childNodes[0];
+                var rowObj = row.cells[nbColonne].childNodes[0];
                 var nametest = rowObj.name
                 if (rowObj.name == btnName) {
                     table.deleteRow(i);
@@ -143,6 +146,39 @@
         catch (e) {
             alert(e);
         }
+    }
+
+    function remplissageTableau(tableID, tableauToAdd) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var nbColonne = document.getElementById(tableID).rows[0].cells.length
+            var tableauFinal = []
+            for (i = 1; i < rowCount; i++) {
+                var tableau = {};
+                for (var c = 0; c < nbColonne - 1; c++) {
+                    var idNameCell = document.getElementById(tableID).rows[1].cells[c].className
+                    tableau[idNameCell + i] = document.getElementById(idNameCell + i).value
+                }
+                tableauFinal.push(tableau)
+            }
+            var jsonArray = JSON.stringify(tableauFinal);
+            document.getElementById(tableauToAdd).value = jsonArray;
+            var test = document.getElementById(tableauToAdd).value
+
+
+        }catch (e) {
+            alert(e);
+        }
+
+    }
+
+    function submitForm(){
+        var tableauProf = document.getElementById('tableauProf').value
+        objProf = JSON.parse(tableauProf)
+        var tableauMatiere = document.getElementById('tableauMatiere').value
+        objMatiere = JSON.parse(tableauMatiere)
+        document.forms["form"].submit();
     }
 </SCRIPT>
 
