@@ -3,47 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+    ></script>
 
+</head>
 <body>
-<INPUT type="button" value="Add Row" onclick="addRow('dataTable')" />
-<TABLE id="dataTable" width="350px" border="1">
-    <TR>
-        <TD><input type="button" name="button1" value="Delete" onclick="removeRow('button1')"></TD>
-        <TD>1</TD>
-        <TD><input type="text" value="" name="nameTxt"></TD>
-    </TR>
-</TABLE>
+
+<form method="post" action="">
+    <div class="table-responsive">
+        <p>Ajouts professeurs</p>
+    <TABLE class="table align-middle" id="dataTableProf" width="350px" border="1">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Competence</th>
+            <th scope="col">Suppression</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row" class="idProf"><input type="number" value="" id="idProf" name="idProf"></td>
+            <td class="nameProf"><input type="text" value="" id="nameProf" name="nameProf"></td>
+            <td class="competencesProf"><input type="text" value="" id="competencesProf" name="competencesProf"></td>
+            <td><input type="button" name="button1" value="Delete" onclick="removeRow('button1', 'dataTableProf')"></td>
+        </tr>
+        </tbody>
+    </TABLE>
+        <INPUT type="button" value="Add Row" onclick="addRow('dataTableProf')" />
+    </div>
+</form>
+
+<form method="post" action="">
+    <div class="table-responsive">
+        <p>Ajouts matieres</p>
+    <table class="table align-middle" id="dataTableCourse" width="10%" border="1">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Nombre d'heure</th>
+            <th scope="col">Competence</th>
+            <th scope="col">Enseignant</th>
+            <th scope="col">Nombre d'etudiant</th>
+            <th scope="col">Salle de cours</th>
+            <th scope="col">Suppression</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row" class="idCourse"><input type="number" value="" id="idCourse"name="idCourse"></td>
+            <td class="nameProfCourse"><input type="text" value="" id="nameProfCourse" name="nameProfCourse"></td>
+            <td class="competencesProfMatiere"><input type="number" value="" id="competencesProfMatiere" name="competencesProf"></td>
+            <td class="competenceMatiere"><input type="number" value="" id="competenceMatiere" name="competenceMatiere"></td>
+            <td class="enseignant"><input type="text" value="" id="enseignant" name="enseignant"></td>
+            <td class="nbEtudiant"><input type="number" value="" id="nbEtudiant" name="nbEtudiant"></td>
+            <td class="salleCours"><input type="text" value="" id="salleCours" name="salleCours"></td>
+            <td><input type="button" id="button1" name="button1" value="Delete" onclick="removeRow('button1', 'dataTableCourse')"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <input type="button" value="Add Row" onclick="addRow('dataTableCourse')" />
+
+    <br><br>
+
+</form>
+
 <SCRIPT language="javascript">
+    var test = document.getElementById('dataTableCourse').rows[0].cells.length
+    var ipnt = document.getElementById('button1').onclick
+    var testName = document.getElementById('dataTableCourse').rows[0].cells[0].className
+    var testTd = document.getElementById('dataTableCourse').rows[0].cells[0]
     function addRow(tableID) {
-        var table = document.getElementById(tableID);
-        var rowCount = table.rows.length;
-        var row = table.insertRow(rowCount);
-        //Column 1
-        var cell1 = row.insertCell(0);
-        var element1 = document.createElement("input");
-        element1.type = "button";
-        var btnName = "button" + (rowCount + 1);
-        element1.name = btnName;
-        element1.setAttribute('value', 'Delete'); // or element1.value = "button";
-        element1.onclick = function () { removeRow(btnName); }
-        cell1.appendChild(element1);
-        //Column 2
-        var cell2 = row.insertCell(1);
-        cell2.innerHTML = rowCount + 1;
-        //Column 3
-        var cell3 = row.insertCell(2);
-        var element3 = document.createElement("input");
-        element3.type = "text";
-        cell3.appendChild(element3);
-    }
-    function removeRow(btnName) {
         try {
-            var table = document.getElementById('dataTable');
+            var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
+            var row = table.insertRow(rowCount);
+            var nbColonne = document.getElementById(tableID).rows[0].cells.length
+            for (var i = 0; i < nbColonne -1; i++) {
+                //Column
+                var idNameCell = document.getElementById(tableID).rows[1].cells[i].className
+                var cell = row.insertCell(i);
+                var element = document.createElement("input");
+                element.type = document.getElementById(idNameCell).type;
+                var btnName = idNameCell + (rowCount + 1);
+                element.id = btnName;
+                element.name = btnName;
+                cell.appendChild(element);
+            }
+            //Column Delete
+            var cell = row.insertCell(-1);
+            var element = document.createElement("input");
+            element.type = "button";
+            var btnName = "button" + (rowCount + 1);
+            element.name = btnName;
+            element.setAttribute('value', 'Delete'); // or element.value = "Delete";
+            //element.onclick = function () { removeRow(btnName, tableID); }
+            element.setAttribute("onclick", "removeRow('"+btnName+"', '"+tableID+"')");
+            cell.appendChild(element);
+        }
+        catch (e) {
+            alert(e);
+        }
+    }
+    function removeRow(btnName, tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            var nbColonne = document.getElementById(tableID).rows[0].cells.length
             for (var i = 0; i < rowCount; i++) {
                 var row = table.rows[i];
-                var rowObj = row.cells[0].childNodes[0];
+                var rowObj = row.cells[nbColonne-1].childNodes[0];
+                var nametest = rowObj.name
                 if (rowObj.name == btnName) {
                     table.deleteRow(i);
                     rowCount--;
@@ -55,6 +145,7 @@
         }
     }
 </SCRIPT>
+
 <script src="FD.js/fd.js"></script>
 <script src="models/Course.js"></script>
 <script src="models/Slot.js"></script>
