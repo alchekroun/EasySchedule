@@ -158,15 +158,13 @@
                 var tableau = {};
                 for (var c = 0; c < nbColonne - 1; c++) {
                     var idNameCell = document.getElementById(tableID).rows[1].cells[c].className
-                    tableau[idNameCell + i] = document.getElementById(idNameCell + i).value
+                    tableau[idNameCell] = document.getElementById(idNameCell + i).value
                 }
                 tableauFinal.push(tableau)
             }
             var jsonArray = JSON.stringify(tableauFinal);
             document.getElementById(tableauToAdd).value = jsonArray;
             var test = document.getElementById(tableauToAdd).value
-
-
         }catch (e) {
             alert(e);
         }
