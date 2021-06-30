@@ -318,10 +318,211 @@ FD.distribute.naive(S,AllVar);
 */
 
 if (document.getElementById('tableauProf').value != "" || document.getElementById('tableauMatiere').value != ""){
+    try {
+        FD.space;
+    } catch (e) {
+        alert("fd.js module needs to be loaded before fd-tests.js");
+    }
+
+    let S = new FD.space();
+
+    var display = {};
+
+    display.show = ((document && document.write)
+        ? (function () { return document.write.apply(document, arguments);  })
+        : (function () { return console.log.apply(console, arguments); }));
+    this.display = display;
+
+
+    function show_result(result, start) {
+        if (result.status === 'solved' || (!result.space.failed && result.space.brancher.queue.length === 0)) {
+            var end = Date.now();
+            var S = result.best || result.space;
+            display.show('<p>' + '['+(end-start)+' ms] ' + ' '  + result.status + ': ' + JSON.stringify(S.solution()) + '</p>');
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    var start = Date.now();
+
+
+
+
+
+
+
+
+    let list_prof = {};
+    let list_Course={};
+    let list_Lecture={};
+    let list_Room={};
+    let dom;
+    let CourseProf=[];
+    let AllVar=[];
+    let tabCourse=[];
+    let tabRoom=[];
+    let sumNbhour=0;
+    let ProductNbhour=1;
+    let Nbcours;
+    let NameCourse=[];
+    let NameRoom=[];
+
     var tableauProf = document.getElementById('tableauProf').value
     var tableauMatiere = document.getElementById('tableauMatiere').value
+    var tableauSalle = document.getElementById('tableauSalle').value
+    var tableauLecture = document.getElementById('tableauLecture').value
     objProf = JSON.parse(tableauProf)
     objMatiere = JSON.parse(tableauMatiere)
-    alert(objProf)
-    alert(objMatiere)
+    objSalle = JSON.parse(tableauSalle)
+    objLecture = JSON.parse(tableauLecture)
+
+    //PROF
+    for (let i=0; i< objProf.length ; i++){
+        var j=i+1;
+        var string= 'P'+j.toString();
+        window['P'+j] = new Teacher(j, objProf[i].nameProf,objProf[i].competencesProf);
+        list_prof[string] = window['P'+j];
+    }
+
+    //COURSE
+    for (let i=0; i< objMatiere.length ; i++){
+        var j=i+1;
+        var string= 'C'+j.toString();
+        var prof='C'+j.toString()+'Prof';
+        var salle= 'C'+j.toString()+'Room';
+        window['C'+j] = new Course(j,objMatiere[i].nameCourse,objMatiere[i].nbTeach,objMatiere[i].competence,prof,objMatiere[i].nbEtudiant,salle);
+        list_Course[string] = window['C'+j];
+    }
+
+    //ROOM
+    for (let i=0; i< objSalle.length ; i++){
+        var j=i+1;
+        var string= 'R'+j.toString();
+        window['R'+j] = new PhysicalRoom(j,objSalle[i].capacite,objSalle[i].lieu,objSalle[i].NSalle,objSalle[i].disponiblite);
+        list_Room[string] = window['R'+j];
+    }
+
+    //LECTURE
+    var tp=1;
+    var tp2=2;
+    for (let i=0; i< objLecture.length ; i++){
+        var string= 'L'+tp.toString();
+        var string2= 'L'+tp2.toString();
+        var course='L'+tp.toString()+'Course';
+        var course2='L'+tp2.toString()+'Course';
+        window['L'+tp] = new Lecture(tp,9,12,objLecture[i].jour,course,objLecture[i].date);
+        window['L'+tp2] = new Lecture(tp2,14,17,objLecture[i].jour,course2,objLecture[i].date);
+        list_Lecture[string] = window['L'+tp];
+        list_Lecture[string2] = window['L'+tp2];
+        tp=tp+2;
+        tp2=tp2+2;
+    }
+
+
+
+
+
+    //C[]teacher
+
+    for (let key1 in list_Course) {
+        let tab=[];
+        for (let key in list_prof) {
+            for (let i in list_prof[key].getCompetence()) {
+                if (list_prof[key].getCompetence()[i] === list_Course[key1].getCompetence()) {
+                    dom = [list_prof[key].getIdTeacher(), list_prof[key].getIdTeacher()];
+                    tab.unshift(dom);
+                }
+            }
+
+        }
+        S.decl(list_Course[key1].getTeacher(), tab.sort());
+        CourseProf.push(list_Course[key1].getTeacher());
+        AllVar.push(list_Course[key1].getTeacher());
+    }
+    S.distinct(CourseProf);
+
+
+    //C[]Room
+    for(let key in list_Course){
+        let tab=[];
+        for (let key1 in list_Room){
+            if(list_Course[key].getNbStudent()<=list_Room[key1].getCapacity()){
+                dom=[list_Room[key1].getIdRoom(),list_Room[key1].getIdRoom()];
+                tab.unshift(dom);
+            }
+        }
+        console.log(tab);
+        S.decl(list_Course[key].getRoom(),tab.sort());
+        NameRoom.push(list_Course[key].getRoom());
+        AllVar.push(list_Course[key].getRoom());
+
+    }
+
+    //L[]Course
+
+    for (let key1 in list_Course){
+        dom=[list_Course[key1].getIdCourse(),list_Course[key1].getIdCourse()];
+        tabCourse.unshift(dom);
+        Nbcours=list_Course[key1].getNbHoursToTeach()/3;
+        sumNbhour+=(list_Course[key1].getIdCourse()*Nbcours);
+        ProductNbhour*=(Math.pow(list_Course[key1].getIdCourse(), Nbcours));
+    }
+    console.log(tabCourse);
+    S.num('s',sumNbhour);
+    S.num('p',ProductNbhour);
+
+
+    for(let key in list_Lecture){
+        S.decl(list_Lecture[key].getCourse(),tabCourse.sort());
+        NameCourse.push(list_Lecture[key].getCourse());
+        AllVar.push(list_Lecture[key].getCourse())
+    }
+
+     S.product(NameCourse,'p');
+     S.sum(NameCourse,'s');
+
+
+    for(let key in list_Lecture)
+    {
+        for (let key1 in list_Lecture){
+            if (list_Lecture[key].getIdLecture()<list_Lecture[key1].getIdLecture()){
+                if (list_Lecture[key].getDay()==list_Lecture[key1].getDay()){
+                    S.eq(list_Lecture[key].getCourse(),list_Lecture[key1].getCourse())
+                }
+            }
+        }
+    }
+
+
+    FD.distribute.naive(S, AllVar);
+
+
+
+
+
+
+
+
+
+
+
+
+    let state = {space: S};
+
+    let count = 0;
+//display.show('<h1>' + state.more + '</h1>');
+
+    do {
+        state = FD.search.depth_first(state);
+        count += show_result(state, start);
+    } while(state.more);
+
+    if (count === 0) {
+        display.show('<p><tt>No solution</tt></p>');
+    }
+
+    display.show('<p>succ = ' + S.succeeded_children + ', fail = ' + S.failed_children + ', stab = ' + S.stable_children + ', <b>total</b> = ' +
+        (S.succeeded_children + S.failed_children + S.stable_children) + '</p>');
+    display.show('<hr/>');
 }

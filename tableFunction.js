@@ -1,8 +1,4 @@
-    var test = document.getElementById('dataTableCourse').rows[0].cells.length
-    var ipnt = document.getElementById('button1').onclick
-    var testName = document.getElementById('dataTableCourse').rows[0].cells[0].className
-    var testTd = document.getElementById('dataTableCourse').rows[0].cells[0]
-    function addRow(tableID) {
+ function addRow(tableID) {
     try {
     var table = document.getElementById(tableID);
     var rowCount = table.rows.length;
@@ -80,6 +76,10 @@
 }
 
     function submitForm(){
+    var tableauLecture = document.getElementById('tableauLecture').value
+    objLecture= JSON.parse(tableauLecture)
+    var tableauSalle = document.getElementById('tableauSalle').value
+    objSalle= JSON.parse(tableauSalle)
     var tableauProf = document.getElementById('tableauProf').value
     objProf = JSON.parse(tableauProf)
     var tableauMatiere = document.getElementById('tableauMatiere').value

@@ -25,11 +25,13 @@
 
 </head>
 <body>
-    <input name="tableauProf" id="tableauProf" value="<?php echo (isset($_POST['tableauProf']))?$variable:'';?>" style="display:none;">
-    <input name="tableauMatiere" id="tableauMatiere" value="<?php echo (isset($_POST['tableauMatiere']))?$variable:'';?>" style="display:none;">
+    <input name="tableauProf" id="tableauProf" value="<?= htmlspecialchars($_POST['tableauProf'])?>" style="display:none;">
+    <input name="tableauMatiere" id="tableauMatiere" value="<?= htmlspecialchars($_POST['tableauMatiere'])?>" style="display:none;">
+    <input name="tableauSalle" id="tableauSalle" value="<?= htmlspecialchars($_POST['tableauSalle'])?>" style="display:none;">
+    <input name="tableauLecture" id="tableauLecture" value="<?= htmlspecialchars($_POST['tableauLecture'])?>" style="display:none;">
 
     <script language="javascript">
-    alert(document.getElementById('tableauProf').value)
+
     </script>
 
 
@@ -46,8 +48,6 @@
     <script src="models/TdTeacher.js"></script>
     <script src="models/Timetable.js"></script>
     <script src="models/ZoomRoom.js"></script>
-    <script src="testPart1.js"></script>
     <script src="testConstraint.js"></script>
-    <script src="testPart3.js"></script>
 </body>
 </html>
